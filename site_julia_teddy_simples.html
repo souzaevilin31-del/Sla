@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Júlia 💜</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:20px; font-family:Arial,sans-serif; color:#fff;
+  background:linear-gradient(160deg,#d9c2ff,#8b63b5 48%,#10254f);
+}
+.card{
+  width:100%; max-width:430px; background:rgba(20,20,55,.82);
+  border-radius:24px; padding:32px 22px; text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+.page{display:none}.page.active{display:block}
+.heart{font-size:52px}
+h1{font-size:32px;margin:12px 0;color:#f0e5ff}
+p{font-size:18px;line-height:1.6;margin:14px 0}
+button{
+  width:100%; border:0; border-radius:14px; padding:15px;
+  margin-top:12px; font-size:17px; font-weight:bold;
+}
+.primary{background:#c8a8f5;color:#24163c}
+.secondary{background:#eee8fa;color:#493466}
+#no{transition:.15s}
+.final{font-size:24px;color:#e8d6ff}
+</style>
+</head>
+<body>
+<div class="card">
+
+<div id="p1" class="page active">
+<div class="heart">💜</div>
+<h1>Oi, Júlia...</h1>
+<p>Eu preparei uma coisa especial para você.</p>
+<p>Antes de continuar, respira fundo. 🥹</p>
+<button class="primary" onclick="show('p2')">Abrir minha surpresa ✨</button>
+</div>
+
+<div id="p2" class="page">
+<div class="heart">💜</div>
+<p>Desde a primeira conversa eu já sabia:</p>
+<p><b>era você que eu queria.</b></p>
+<p>Sei que tem muita coisa que dificulta essa relação, que parece impossível. Mas eu ainda quero tentar.</p>
+<button class="primary" onclick="show('p3')">Continuar 💌</button>
+</div>
+
+<div id="p3" class="page">
+<div class="heart">💜💙</div>
+<p>Quero estar com você em tudo.</p>
+<p>Eu gosto de você de verdade.<br><b>Eu te quero de verdade.</b></p>
+<p>Me acostumei com você. Quando a gente não conversa, meu dia fica vazio e triste.</p>
+<p><i>Tomara que você sinta o mesmo por mim.</i></p>
+<button class="primary" onclick="show('p4')">Tenho uma pergunta... 💍</button>
+</div>
+
+<div id="p4" class="page">
+<div class="heart">💜</div>
+<h1>Júlia...</h1>
+<p>Depois de tudo isso, eu só quero saber uma coisa:</p>
+<p class="final"><b>Quer namorar comigo?</b> 💜💙</p>
+<button class="primary" onclick="show('p5')">SIM! 😭💜</button>
+<button class="secondary" id="no">Não 🙈</button>
+</div>
+
+<div id="p5" class="page">
+<div class="heart">💜💙</div>
+<h1>EU SABIA! 😭</h1>
+<p class="final"><b>Júlia ❤️ Teddy</b></p>
+<p>Que esse seja o começo de uma história linda para nós.</p>
+<p>Eu te quero na minha vida. 💜</p>
+</div>
+
+</div>
+
+<script>
+function show(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+const no=document.getElementById('no');
+function fugir(){
+ no.style.position='fixed';
+ no.style.width='130px';
+ no.style.left=(Math.random()*65+15)+'%';
+ no.style.top=(Math.random()*70+15)+'%';
+}
+no.addEventListener('touchstart',function(e){e.preventDefault();fugir()});
+no.addEventListener('mouseover',fugir);
+</script>
+</body>
+</html>
