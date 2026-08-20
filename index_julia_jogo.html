@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#120c24">
+<title>Para Júlia 💜</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{
+  min-height:100vh;padding:16px;display:flex;align-items:center;justify-content:center;
+  color:#fff;background:
+  radial-gradient(circle at 20% 10%,rgba(255,120,210,.22),transparent 30%),
+  radial-gradient(circle at 90% 80%,rgba(130,90,255,.20),transparent 35%),
+  linear-gradient(145deg,#24113b,#100b20 55%,#080611);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
+  background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.game{
+  width:100%;max-width:440px;position:relative;z-index:2;
+  background:rgba(13,9,28,.90);border:1px solid rgba(255,255,255,.14);
+  border-radius:28px;padding:16px;box-shadow:0 25px 80px rgba(0,0,0,.55);
+  backdrop-filter:blur(14px);
+}
+.hud{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.player,.level{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:9px 12px;font-size:12px;font-weight:800;letter-spacing:.4px
+}
+.level{color:#ffc1ed}
+.progress{height:7px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;margin-bottom:15px}
+.progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff67b7,#9e6cff);border-radius:99px}
+.card{
+  border:1px solid rgba(255,255,255,.13);border-radius:23px;padding:22px 18px;
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  text-align:center;
+}
+.page{display:none}.page.active{display:block;animation:enter .35s ease}
+@keyframes enter{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.heart{font-size:56px;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.badge{
+  display:inline-block;margin:4px 0 8px;padding:6px 11px;border-radius:99px;
+  background:rgba(255,103,183,.13);border:1px solid rgba(255,145,211,.25);
+  color:#ffb7e5;font-size:11px;font-weight:900;letter-spacing:2px
+}
+h1{font-size:30px;line-height:1.18;margin:12px 0}
+.subtitle{color:#d8cce8;font-size:15px;line-height:1.5}
+.text{font-size:16px;line-height:1.65;text-align:left}
+.quote{
+  padding:13px 14px;border-radius:15px;background:rgba(183,117,255,.09);
+  border:1px solid rgba(205,167,255,.15);border-left:3px solid #d596ff
+}
+button,.button{
+  display:block;width:100%;padding:15px;margin-top:12px;border:0;border-radius:15px;
+  font-size:16px;font-weight:900;text-decoration:none;cursor:pointer;
+  background:linear-gradient(135deg,#ff67b7,#9c6cff);color:#fff;
+  box-shadow:0 9px 25px rgba(194,92,190,.25);transition:.18s
+}
+button:active{transform:scale(.97)}
+.secondary{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.15);box-shadow:none}
+.quest{
+  margin:14px 0;padding:14px;border-radius:17px;background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.10);font-size:14px;color:#e8dff0
+}
+.choice{position:relative;height:175px;margin-top:8px}
+.yes{font-size:19px}
+.no{position:absolute;left:50%;width:52%;transform:translateX(-50%);transition:.15s}
+.small{font-size:12px;color:#aaa0bd}
+.reward{
+  margin-top:16px;padding:14px;border-radius:16px;background:rgba(255,103,183,.09);
+  border:1px solid rgba(255,103,183,.18);font-weight:800
+}
+.signature{font-size:19px;color:#e6d4ff;margin-top:22px}
+.xp{font-size:11px;color:#aaa0bd;margin-top:10px}
+.float{position:fixed;bottom:-40px;z-index:1;animation:up 7s linear forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+.confetti{position:fixed;top:-30px;font-size:25px;z-index:20;animation:fall 3s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+</style>
+</head>
+
+<body>
+<main class="game">
+
+  <div class="hud">
+    <div class="player">💜 JÚLIA</div>
+    <div class="level" id="level">FASE 1 / 5</div>
+  </div>
+  <div class="progress"><span id="bar"></span></div>
+
+  <div class="card">
+
+    <section id="p1" class="page active">
+      <div class="heart">💜</div>
+      <div class="badge">MISSÃO ESPECIAL</div>
+      <h1>Oi, Júlia...</h1>
+      <p class="subtitle">Você desbloqueou uma surpresa secreta. ✨</p>
+      <div class="quest">🎮 <b>Objetivo:</b> descobrir o que a Evilin preparou para você.</div>
+      <button onclick="show(2)">▶ COMEÇAR A FASE</button>
+      <a class="button secondary" href="https://open.spotify.com/search/Best%20Part%20Daniel%20Caesar%20H.E.R." target="_blank">🎵 Ouvir nossa música</a>
+    </section>
+
+    <section id="p2" class="page">
+      <div class="heart">🫶</div>
+      <div class="badge">FASE 2 • HISTÓRIA</div>
+      <h1>Quero te contar uma coisa...</h1>
+      <div class="text">
+        <p>Desde a primeira conversa eu já sabia: <b>era você que eu queria.</b></p>
+        <p>Sei que tem muita coisa que dificulta essa relação, que parece impossível. Mas eu ainda quero tentar.</p>
+        <p>Quero estar com você em tudo.</p>
+        <p class="quote"><b>Eu gosto de você de verdade.<br>Eu te quero de verdade.</b></p>
+        <p>Me acostumei com você. Quando a gente não conversa, meu dia fica vazio e triste.</p>
+        <p>Tomara que você sinta o mesmo por mim. 💜</p>
+      </div>
+      <button onclick="show(3)">DESBLOQUEAR PRÓXIMA FASE 🔓</button>
+    </section>
+
+    <section id="p3" class="page">
+      <div class="heart">💜</div>
+      <div class="badge">FASE 3 • SENTIMENTOS</div>
+      <h1>O que eu sinto por você...</h1>
+      <div class="text">
+        <p>Me apaixonar por você foi algo tão de repente, tão inesperado. Mas a cada dia que passa eu continuo me apaixonando ainda mais por cada detalhe seu.</p>
+        <p>Seus lindos olhos... são mais belos que uma noite estrelada. Eu sempre me perco olhando neles.</p>
+        <p>Seu sorriso, nossa... esse seu lindo sorriso é capaz de desarmar qualquer guerreiro valente e acabar com qualquer coração.</p>
+        <p>Sua risada, a mais graciosa de todo o universo. Escutá-la sempre me acalma, pois sei que tirar uma risada sincera de alguém é a maior luta, e te ver feliz sempre me deixa feliz.</p>
+        <p>Nem as mais belas pinturas de Van Gogh conseguem superar a sua beleza. Pra mim você é a definição de perfeição.</p>
+        <p><b>Eu, Evilin, quero estar ao seu lado sempre.</b> Porque você é minha neném. E eu quero cuidar de você pro resto das nossas vidas. 💜</p>
+      </div>
+      <button onclick="show(4)">⚔️ ENFRENTAR A FASE FINAL</button>
+    </section>
+
+    <section id="p4" class="page">
+      <div class="heart">💍</div>
+      <div class="badge">FASE FINAL • BOSS</div>
+      <h1>Uma última escolha...</h1>
+      <p class="subtitle">Você chegou até aqui. Agora só existe uma missão.</p>
+      <div class="quest">
+        💗 <b>MISSÃO:</b><br>
+        Júlia, você aceita viver essa história comigo?
+      </div>
+      <h1>Quer namorar comigo? 🥺💜</h1>
+
+      <div class="choice">
+        <button class="yes" onclick="aceitar()">💖 SIM! EU ACEITO</button>
+        <button id="no" class="secondary no" onclick="fugir()">🙈 Não</button>
+      </div>
+
+      <p class="small">O botão “Não” está tentando fugir da missão... 👀</p>
+      <div class="xp">❤️ Amor necessário: 100% • Progresso: FINAL</div>
+    </section>
+
+    <section id="p5" class="page">
+      <div class="heart">💖</div>
+      <div class="badge">🏆 MISSÃO CONCLUÍDA</div>
+      <h1>EU SABIA! 🥹💜</h1>
+      <p class="subtitle">Você desbloqueou o final verdadeiro.</p>
+
+      <div class="reward">
+        ✨ <b>RECOMPENSA DESBLOQUEADA</b><br><br>
+        Agora começa a nossa história de verdade.
+      </div>
+
+      <div class="text" style="text-align:center">
+        <p>Eu quero cuidar de nós, estar ao seu lado e aproveitar cada momento.</p>
+        <p><b>Obrigado por escolher ficar comigo.</b></p>
+      </div>
+
+      <div class="signature">Com carinho,<br><b>Evilin</b> 💜</div>
+      <a class="button secondary" href="https://open.spotify.com/search/Best%20Part%20Daniel%20Caesar%20H.E.R." target="_blank">🎵 Nossa música</a>
+    </section>
+
+  </div>
+</main>
+
+<script>
+function show(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+
+  document.getElementById('level').textContent = 'FASE ' + n + ' / 5';
+  document.getElementById('bar').style.width = ((n-1)/4*100 + 25) + '%';
+
+  window.scrollTo(0,0);
+}
+
+function fugir(){
+  const b=document.getElementById('no');
+  const a=document.querySelector('.choice');
+  const maxX=Math.max(0,a.clientWidth-b.offsetWidth);
+  const maxY=Math.max(20,a.clientHeight-b.offsetHeight);
+  b.style.transform='none';
+  b.style.left=(Math.random()*maxX)+'px';
+  b.style.top=(Math.random()*maxY)+'px';
+}
+
+function aceitar(){
+  show(5);
+
+  for(let i=0;i<60;i++){
+    const c=document.createElement('div');
+    c.className='confetti';
+    c.textContent=['💜','💖','💕','✨','🌸'][Math.floor(Math.random()*5)];
+    c.style.left=Math.random()*100+'vw';
+    c.style.animationDelay=(Math.random()*1.5)+'s';
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3500);
+  }
+}
+
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='float';
+  h.textContent=['💜','♡','✨','💕'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(18+Math.random()*18)+'px';
+  h.style.animationDuration=(5+Math.random()*5)+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+},900);
+</script>
+</body>
+</html>
