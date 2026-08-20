@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#17113a">
+<title>Para Júlia 💜</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;display:flex;align-items:center;justify-content:center;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#fff;
+background:linear-gradient(145deg,#cbb7ff 0%,#765aa8 38%,#17113a 72%,#081b3d 100%)}
+.card{width:100%;max-width:430px;background:rgba(9,8,32,.84);border:1px solid rgba(255,255,255,.18);
+border-radius:28px;padding:30px 22px 25px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.page{display:none}.page.active{display:block}.heart{font-size:56px;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+h1{font-size:31px;line-height:1.2;margin:14px 0 10px}.subtitle{color:#ddd5ff;font-size:15px}
+.text{font-size:17px;line-height:1.7;text-align:left}.quote{border-left:3px solid #c4a8ff;padding-left:14px}
+button,.button{display:block;width:100%;padding:15px;margin-top:13px;border:0;border-radius:15px;
+font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;background:#c8adff;color:#1b1235}
+.secondary{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.choice{position:relative;height:150px}.yes{font-size:19px}.no{position:absolute;left:50%;width:46%;transform:translateX(-50%)}
+.small{font-size:13px;color:#bdb5d8}.signature{font-size:19px;color:#ddd0ff;margin-top:22px}
+</style>
+</head>
+<body>
+<main class="card">
+
+<section id="p1" class="page active">
+<div class="heart">💜</div>
+<h1>Oi, Júlia...</h1>
+<p class="subtitle">Eu preparei uma coisinha especial para você.</p>
+<button onclick="show(2)">Abrir minha surpresa ✨</button>
+<a class="button secondary" href="https://open.spotify.com/search/Best%20Part%20Daniel%20Caesar%20H.E.R." target="_blank">🎵 Ouvir “Best Part”</a>
+</section>
+
+<section id="p2" class="page">
+<div class="heart">🫶</div>
+<h1>Quero te contar uma coisa...</h1>
+<div class="text">
+<p>Desde a primeira conversa eu já sabia: <b>era você que eu queria.</b></p>
+<p>Sei que tem muita coisa que dificulta essa relação, que parece impossível. Mas eu ainda quero tentar.</p>
+<p>Quero estar com você em tudo.</p>
+<p class="quote"><b>Eu gosto de você de verdade.<br>Eu te quero de verdade.</b></p>
+<p>Me acostumei com você. Quando a gente não conversa, meu dia fica vazio e triste.</p>
+<p>Tomara que você sinta o mesmo por mim. 💜</p>
+</div>
+<button onclick="show(3)">Tem mais uma coisa... 💌</button>
+</section>
+
+<section id="p3" class="page">
+<div class="heart">💜</div>
+<h1>O que eu sinto por você...</h1>
+<div class="text">
+<p>Me apaixonar por você foi algo tão de repente, tão inesperado. Mas a cada dia que passa eu continuo me apaixonando ainda mais por cada detalhe seu.</p>
+<p>Seus lindos olhos... são mais belos que uma noite estrelada. Eu sempre me perco olhando neles.</p>
+<p>Seu sorriso, nossa... esse seu lindo sorriso é capaz de desarmar qualquer guerreiro valente e acabar com qualquer coração.</p>
+<p>Sua risada, a mais graciosa de todo o universo. Escutá-la sempre me acalma, pois sei que tirar uma risada sincera de alguém é a maior luta, e te ver feliz sempre me deixa feliz.</p>
+<p>Nem as mais belas pinturas de Van Gogh conseguem superar a sua beleza. Pra mim você é a definição de perfeição.</p>
+<p><b>Eu, Evilin, quero estar ao seu lado sempre.</b> Porque você é minha neném. E eu quero cuidar de você pro resto das nossas vidas. 💜</p>
+</div>
+<button onclick="show(4)">Tenho uma pergunta... 💍</button>
+</section>
+
+<section id="p4" class="page">
+<div class="heart">💜💙</div>
+<h1>Júlia, quer namorar comigo?</h1>
+<p class="subtitle">Eu quero tentar viver isso com você.</p>
+<div class="choice">
+<button class="yes" onclick="show(5)">SIM! 💜</button>
+<button id="no" class="secondary no" onclick="fugir()">Não 🙈</button>
+</div>
+<p class="small">Dica: o botão “Não” é meio tímido... 😳</p>
+</section>
+
+<section id="p5" class="page">
+<div class="heart">💜💙</div>
+<h1>EU SABIA! 🥹</h1>
+<p class="subtitle">Então agora é oficial...</p>
+<div class="text" style="text-align:center">
+<p>Eu quero cuidar de nós, estar ao seu lado e aproveitar cada momento.</p>
+<p><b>Obrigado por escolher ficar comigo.</b></p>
+</div>
+<div class="signature">Com carinho,<br><b>Evilin</b> 💜</div>
+<a class="button secondary" href="https://open.spotify.com/search/Best%20Part%20Daniel%20Caesar%20H.E.R." target="_blank">🎵 Nossa música</a>
+</section>
+
+</main>
+<script>
+function show(n){
+document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+document.getElementById('p'+n).classList.add('active');
+window.scrollTo(0,0);
+}
+function fugir(){
+var b=document.getElementById('no'), a=document.querySelector('.choice');
+var x=Math.random()*Math.max(0,a.clientWidth-b.offsetWidth);
+var y=25+Math.random()*80;
+b.style.transform='none'; b.style.left=x+'px'; b.style.top=y+'px';
+}
+</script>
+</body>
+</html>
