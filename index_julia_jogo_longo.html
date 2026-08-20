@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#12091f">
+<title>Para Júlia 💜</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{
+  min-height:100vh;padding:14px;display:flex;justify-content:center;align-items:flex-start;
+  color:#fff;background:
+  radial-gradient(circle at 15% 8%,rgba(255,100,190,.24),transparent 30%),
+  radial-gradient(circle at 90% 75%,rgba(125,80,255,.20),transparent 35%),
+  linear-gradient(145deg,#251039,#10091d 55%,#07050d);
+  overflow-x:hidden;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;
+background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);
+background-size:28px 28px}
+.game{width:100%;max-width:460px;position:relative;z-index:2;margin:8px auto 24px}
+.hud{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.pill{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:14px;padding:9px 10px;font-size:11px;font-weight:900;text-align:center}
+.pill:first-child{color:#ffc4ea}
+.music{cursor:pointer}
+.progress{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:12px}
+.progress span{display:block;height:100%;width:12.5%;background:linear-gradient(90deg,#ff63b6,#9c68ff);transition:.35s}
+.card{border:1px solid rgba(255,255,255,.13);border-radius:26px;padding:19px 16px;background:rgba(12,7,24,.9);box-shadow:0 25px 80px rgba(0,0,0,.5);backdrop-filter:blur(14px)}
+.page{display:none}.page.active{display:block;animation:enter .35s ease}
+@keyframes enter{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.heart{font-size:54px;text-align:center;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+.badge{display:inline-block;padding:6px 10px;border-radius:99px;background:rgba(255,105,185,.13);border:1px solid rgba(255,145,211,.25);color:#ffb9e5;font-size:10px;font-weight:900;letter-spacing:1.8px}
+h1{text-align:center;font-size:29px;line-height:1.18;margin:12px 0}
+h2{text-align:center;font-size:21px;margin:12px 0}
+.subtitle{text-align:center;color:#d8cce8;font-size:15px;line-height:1.55}
+.text{font-size:15px;line-height:1.65}
+.quest{margin:13px 0;padding:14px;border-radius:17px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1);line-height:1.55}
+.quote{padding:13px;border-radius:15px;background:rgba(183,117,255,.09);border-left:3px solid #d596ff}
+button,.btn{display:block;width:100%;padding:14px;margin-top:11px;border:0;border-radius:15px;font-size:15px;font-weight:900;text-decoration:none;text-align:center;cursor:pointer;background:linear-gradient(135deg,#ff67b7,#9c6cff);color:#fff;box-shadow:0 9px 25px rgba(194,92,190,.25)}
+.secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+button:active{transform:scale(.97)}
+.choice-grid{display:grid;gap:10px;margin-top:12px}
+.choice-grid button.selected{outline:3px solid #ffc2e9;background:linear-gradient(135deg,#ff4faf,#855cf7)}
+.tap-area{height:230px;position:relative;border-radius:20px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);overflow:hidden;margin-top:12px}
+.tap-heart{position:absolute;font-size:34px;cursor:pointer;animation:pop .2s}
+@keyframes pop{from{transform:scale(.3)}to{transform:scale(1)}}
+.counter{text-align:center;margin-top:10px;font-weight:900;color:#ffc4e8}
+.memory{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mem{height:82px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);font-size:28px}
+.mem.open{background:rgba(255,103,183,.16)}
+.slider-wrap{padding:18px 8px}
+input[type=range]{width:100%;accent-color:#ff67b7}
+.big{font-size:30px;text-align:center;font-weight:900;color:#ffc3e8}
+.reward{text-align:center;padding:15px;border-radius:17px;background:rgba(255,103,183,.1);border:1px solid rgba(255,103,183,.2);margin-top:14px}
+.choice{position:relative;height:175px;margin-top:8px}
+.no{position:absolute;left:50%;width:52%;transform:translateX(-50%);transition:.15s}
+.small{text-align:center;color:#aaa0bd;font-size:11px}
+.signature{text-align:center;font-size:19px;color:#e6d4ff;margin-top:20px}
+.confetti{position:fixed;top:-30px;font-size:25px;z-index:20;animation:fall 3s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+.float{position:fixed;bottom:-40px;z-index:1;animation:up 7s linear forwards;pointer-events:none}
+@keyframes up{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+</style>
+</head>
+<body>
+<audio id="music" src="musica.mp3" preload="auto" loop></audio>
+
+<main class="game">
+  <div class="hud">
+    <div class="pill">💜 JÚLIA</div>
+    <div class="pill" id="stage">FASE 1 / 8</div>
+    <div class="pill music" id="musicBtn" onclick="toggleMusic()">🎵 OFF</div>
+  </div>
+  <div class="progress"><span id="bar"></span></div>
+
+  <div class="card">
+    <section id="p1" class="page active">
+      <div class="heart">💜</div>
+      <span class="badge">MISSÃO ESPECIAL</span>
+      <h1>Oi, Júlia...</h1>
+      <p class="subtitle">Você encontrou uma história secreta feita especialmente para você. ✨</p>
+      <div class="quest">🎮 <b>Objetivo:</b> passar pelas 8 fases e descobrir o final verdadeiro.</div>
+      <button onclick="startGame()">▶ COMEÇAR A HISTÓRIA</button>
+      <p class="small">A música começa ao tocar no botão e continua durante o jogo. 🎵</p>
+    </section>
+
+    <section id="p2" class="page">
+      <div class="heart">🌙</div><span class="badge">FASE 2 • PRIMEIRO SINAL</span>
+      <h1>Uma pergunta...</h1>
+      <p class="subtitle">Se você pudesse guardar uma coisa para sempre, o que escolheria?</p>
+      <div class="choice-grid">
+        <button onclick="pick(this,3)">Um sorriso que me faz feliz 😊</button>
+        <button class="secondary" onclick="pick(this,3)">Um olhar que me faz esquecer o mundo ✨</button>
+        <button class="secondary" onclick="pick(this,3)">Uma risada que acalma meu coração 💕</button>
+      </div>
+    </section>
+
+    <section id="p3" class="page">
+      <div class="heart">💗</div><span class="badge">FASE 3 • CORAÇÕES</span>
+      <h1>Teste sua sorte</h1>
+      <p class="subtitle">Toque em <b>5 corações</b> para desbloquear a próxima parte.</p>
+      <div class="tap-area" id="tapArea"></div>
+      <div class="counter" id="tapCounter">0 / 5 💜</div>
+    </section>
+
+    <section id="p4" class="page">
+      <div class="heart">🫶</div><span class="badge">FASE 4 • MEMÓRIA</span>
+      <h1>Você lembra?</h1>
+      <p class="subtitle">Encontre os dois símbolos iguais. 💜</p>
+      <div class="memory" id="memory"></div>
+      <button id="memoryNext" style="display:none" onclick="show(5)">🔓 CONTINUAR</button>
+    </section>
+
+    <section id="p5" class="page">
+      <div class="heart">✨</div><span class="badge">FASE 5 • HISTÓRIA</span>
+      <h1>Quero te contar uma coisa...</h1>
+      <div class="text">
+        <p>Desde a primeira conversa eu já sabia: <b>era você que eu queria.</b></p>
+        <p>Sei que tem muita coisa que dificulta essa relação, que parece impossível. Mas eu ainda quero tentar.</p>
+        <p>Quero estar com você em tudo.</p>
+        <p class="quote"><b>Eu gosto de você de verdade.<br>Eu te quero de verdade.</b></p>
+        <p>Me acostumei com você. Quando a gente não conversa, meu dia fica vazio e triste.</p>
+        <p>Tomara que você sinta o mesmo por mim. 💜</p>
+      </div>
+      <button onclick="show(6)">DESBLOQUEAR PRÓXIMA FASE 🔓</button>
+    </section>
+
+    <section id="p6" class="page">
+      <div class="heart">🌌</div><span class="badge">FASE 6 • SENTIMENTOS</span>
+      <h1>O que eu sinto por você...</h1>
+      <div class="text">
+        <p>Me apaixonar por você foi algo tão de repente, tão inesperado. Mas a cada dia que passa eu continuo me apaixonando ainda mais por cada detalhe seu.</p>
+        <p>Seus lindos olhos... são mais belos que uma noite estrelada. Eu sempre me perco olhando neles.</p>
+        <p>Seu sorriso, nossa... esse seu lindo sorriso é capaz de desarmar qualquer guerreiro valente e acabar com qualquer coração.</p>
+        <p>Sua risada, a mais graciosa de todo o universo. Escutá-la sempre me acalma, pois sei que tirar uma risada sincera de alguém é a maior luta, e te ver feliz sempre me deixa feliz.</p>
+        <p>Nem as mais belas pinturas de Van Gogh conseguem superar a sua beleza. Pra mim você é a definição de perfeição.</p>
+        <p><b>Eu, Evilin, quero estar ao seu lado sempre.</b> Porque você é minha neném. E eu quero cuidar de você pro resto das nossas vidas. 💜</p>
+      </div>
+      <button onclick="show(7)">⚔️ CONTINUAR A MISSÃO</button>
+    </section>
+
+    <section id="p7" class="page">
+      <div class="heart">💞</div><span class="badge">FASE 7 • ÚLTIMO TESTE</span>
+      <h1>Quanto você acredita em nós?</h1>
+      <p class="subtitle">Arraste o coração até 100% para liberar a fase final.</p>
+      <div class="slider-wrap">
+        <div class="big" id="percent">0%</div>
+        <input id="range" type="range" min="0" max="100" value="0" oninput="sliderCheck(this.value)">
+      </div>
+      <div class="quest">💗 Confiança carregada: <b id="load">0%</b></div>
+      <button id="rangeNext" style="display:none" onclick="show(8)">💍 ENFRENTAR O BOSS FINAL</button>
+    </section>
+
+    <section id="p8" class="page">
+      <div class="heart">💍</div><span class="badge">FASE 8 • BOSS FINAL</span>
+      <h1>Uma última escolha...</h1>
+      <p class="subtitle">Você chegou até aqui. Agora só existe uma missão.</p>
+      <div class="quest"><b>MISSÃO FINAL:</b><br>Júlia, você aceita viver essa história comigo?</div>
+      <h1>Quer namorar comigo? 🥺💜</h1>
+      <div class="choice">
+        <button onclick="aceitar()">💖 SIM! EU ACEITO</button>
+        <button id="no" class="secondary no" onclick="fugir()">🙈 Não</button>
+      </div>
+      <p class="small">O botão “Não” está tentando fugir da missão... 👀</p>
+    </section>
+
+    <section id="p9" class="page">
+      <div class="heart">💖</div><span class="badge">🏆 FINAL VERDADEIRO</span>
+      <h1>EU SABIA! 🥹💜</h1>
+      <p class="subtitle">Você desbloqueou o final verdadeiro.</p>
+      <div class="reward">✨ <b>MISSÃO CONCLUÍDA</b><br><br>Agora começa a nossa história de verdade. 💕</div>
+      <div class="text" style="text-align:center">
+        <p>Eu quero cuidar de nós, estar ao seu lado e aproveitar cada momento.</p>
+        <p><b>Obrigado por escolher ficar comigo.</b></p>
+      </div>
+      <div class="signature">Com carinho,<br><b>Evilin</b> 💜</div>
+      <button class="secondary" onclick="toggleMusic()">🎵 Controlar música</button>
+    </section>
+  </div>
+</main>
+
+<script>
+const music=document.getElementById('music');
+music.volume=.55;
+let current=1;
+
+function startGame(){
+  music.play().then(updateMusic).catch(updateMusic);
+  show(2);
+}
+function toggleMusic(){
+  if(music.paused) music.play().then(updateMusic).catch(updateMusic);
+  else { music.pause(); updateMusic(); }
+}
+function updateMusic(){
+  document.getElementById('musicBtn').textContent=music.paused?'🎵 OFF':'🎵 ON';
+}
+function show(n){
+  current=n;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+  const max=8;
+  document.getElementById('stage').textContent=n<=8?`FASE ${n} / ${max}`:'FINAL';
+  document.getElementById('bar').style.width=Math.min(100,((n-1)/(max-1))*100)+'%';
+  window.scrollTo(0,0);
+  if(n===3) initTap();
+  if(n===4) initMemory();
+}
+function pick(btn,next){
+  document.querySelectorAll('#p2 button').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  setTimeout(()=>show(next),450);
+}
+let taps=0;
+function initTap(){
+  taps=0; document.getElementById('tapCounter').textContent='0 / 5 💜';
+  const area=document.getElementById('tapArea'); area.innerHTML='';
+  spawnHeart();
+}
+function spawnHeart(){
+  if(taps>=5) return;
+  const area=document.getElementById('tapArea');
+  const h=document.createElement('div'); h.className='tap-heart'; h.textContent=['💜','💖','💕','💗'][Math.floor(Math.random()*4)];
+  h.style.left=(5+Math.random()*82)+'%'; h.style.top=(5+Math.random()*75)+'%';
+  h.onclick=()=>{
+    taps++; h.remove();
+    document.getElementById('tapCounter').textContent=taps+' / 5 💜';
+    if(taps<5) spawnHeart(); else setTimeout(()=>show(4),500);
+  };
+  area.appendChild(h);
+}
+let memOpen=[],memDone=false;
+function initMemory(){
+  const box=document.getElementById('memory'); box.innerHTML=''; memOpen=[]; memDone=false;
+  document.getElementById('memoryNext').style.display='none';
+  const vals=['💜','💖','💜','💖']; vals.sort(()=>Math.random()-.5);
+  vals.forEach((v,i)=>{
+    const b=document.createElement('button'); b.className='mem'; b.textContent='❔';
+    b.onclick=()=>{
+      if(memOpen.length>=2 || b.classList.contains('open')) return;
+      b.classList.add('open'); b.textContent=v; memOpen.push({b,v});
+      if(memOpen.length===2){
+        if(memOpen[0].v===memOpen[1].v){
+          memDone=true; document.getElementById('memoryNext').style.display='block';
+        }else{
+          setTimeout(()=>memOpen.forEach(x=>{x.b.classList.remove('open');x.b.textContent='❔'}),650);
+        }
+        setTimeout(()=>memOpen=[],700);
+      }
+    };
+    box.appendChild(b);
+  });
+}
+function sliderCheck(v){
+  document.getElementById('percent').textContent=v+'%';
+  document.getElementById('load').textContent=v+'%';
+  if(Number(v)>=100) document.getElementById('rangeNext').style.display='block';
+}
+function fugir(){
+  const b=document.getElementById('no'), a=document.querySelector('#p8 .choice');
+  const maxX=Math.max(0,a.clientWidth-b.offsetWidth), maxY=Math.max(20,a.clientHeight-b.offsetHeight);
+  b.style.transform='none'; b.style.left=(Math.random()*maxX)+'px'; b.style.top=(Math.random()*maxY)+'px';
+}
+function aceitar(){
+  show(9);
+  for(let i=0;i<75;i++){
+    const c=document.createElement('div'); c.className='confetti';
+    c.textContent=['💜','💖','💕','✨','🌸','💗'][Math.floor(Math.random()*6)];
+    c.style.left=Math.random()*100+'vw'; c.style.animationDelay=(Math.random()*1.5)+'s';
+    document.body.appendChild(c); setTimeout(()=>c.remove(),3500);
+  }
+}
+setInterval(()=>{
+  const h=document.createElement('div'); h.className='float';
+  h.textContent=['💜','♡','✨','💕'][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+'vw'; h.style.fontSize=(18+Math.random()*18)+'px';
+  h.style.animationDuration=(5+Math.random()*5)+'s';
+  document.body.appendChild(h); setTimeout(()=>h.remove(),10000);
+},900);
+</script>
+</body>
+</html>
